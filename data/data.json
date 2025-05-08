@@ -1,0 +1,13 @@
+[
+    {
+        "name": "Python",
+        "alternate_url": "<https://hh.ru/vacancy/123456>",
+        "salary": {
+            "from": 100,
+            "to": 150
+        },
+        "experience": {
+            "name": "Требования: опыт работы от 3 лет"
+        }
+    }
+]
