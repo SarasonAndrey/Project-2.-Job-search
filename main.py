@@ -14,14 +14,12 @@ def user_interaction() -> None:
     # int(input("Введите количество вакансий для вывода в топ N: "))
     top_n = 3
 
-    # Создание экземпляра класса для выгрузки вакансий
     hh_api = HeadHunterApi()
-    # Получение вакансий по запросу
+
     hh_vacancies = hh_api.get_vacancies(search_query, 20)
-    # Формирование списка экземпляров класса вакансий из полученных данных
+
     vacancies_list = Vacancy.cast_to_object_list(hh_vacancies)
 
-    # Вывод топ вакансий по средней зарплате
     top_vacancies = get_top_vacancies(vacancies_list, top_n)
     print("Отсортированные вакансии по средней зарплате:")
     print_vacancies(top_vacancies)
@@ -37,22 +35,20 @@ def user_interaction() -> None:
         "Java", "<https://hh.ru/vacancy/123457>", 120, 150, "Требования: ..."
     )
 
-    # Создание экземпляра класса для работы с файлами
     json_saver = JsonSaver()
-    # Формирование словаря из экземпляра класса для записи в файл
+
     new_vacancy_to_dict = Vacancy.transform_to_dict(new_vacancy)
     vacancy_to_dict = Vacancy.transform_to_dict(new_vacancy_to_delete)
-    # Сохранение созданной вакансии
+
     json_saver.add_data_to_file(new_vacancy_to_dict)
     json_saver.add_data_to_file(vacancy_to_dict)
-    # Получение данных из файла
+
     vacancy_from_file = json_saver.get_data_from_file()
-    # Удаление данных из файла
+
     json_saver.delete_data_from_file(vacancy_to_dict)
-    # Преобразование json-данных в экземпляр класса Vacancy
+
     vacancy_from_file_list = Vacancy.cast_to_object_list(vacancy_from_file)
 
-    # Вывод вакансий в консоль
     print("Список вакансий из файла:")
     print_vacancies(vacancy_from_file_list)
 
