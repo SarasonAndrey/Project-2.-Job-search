@@ -4,7 +4,6 @@ from src.vacancy import Vacancy
 
 
 def test_vacancy_init(vacancy_instance: Vacancy) -> None:
-    """Тест проверяет корректное создания экземпляра класса Vacancy и его атрибутов."""
     assert vacancy_instance.name == "Python Developer"
     assert vacancy_instance.url == "1"
     assert vacancy_instance.salary_from == 10
@@ -13,39 +12,37 @@ def test_vacancy_init(vacancy_instance: Vacancy) -> None:
 
 
 def test_vacancy_str(vacancy_instance: Vacancy) -> None:
-    """Тест проверяет корректный вывод метода str."""
     assert (
-        str(vacancy_instance)
-        == "Python Developer. Ссылка: 1. Зарплата: от 10 до 50. Требуемый опыт: Опыт работы от 2 лет."
+            str(vacancy_instance)
+            == "Python Developer. Ссылка: 1. Зарплата: от 10 до 50. Требуемый опыт: Опыт работы от 2 лет."
     )
 
 
 def test_vacancy_str_with_zero() -> None:
-    """Тест проверяет корректный вывод метода str, когда значение зарплаты равно 0 и/или опыт работы не указан."""
     vacancy_wo_salary_from = Vacancy("Python", "1", 0, 50, "Опыт")
     assert (
-        str(vacancy_wo_salary_from)
-        == "Python. Ссылка: 1. Зарплата: до 50. Требуемый опыт: Опыт."
+            str(vacancy_wo_salary_from)
+            == "Python. Ссылка: 1. Зарплата: до 50. Требуемый опыт: Опыт."
     )
     vacancy_wo_salary_to = Vacancy("Python", "1", 20, 0, "Опыт")
     assert (
-        str(vacancy_wo_salary_to)
-        == "Python. Ссылка: 1. Зарплата: от 20. Требуемый опыт: Опыт."
+            str(vacancy_wo_salary_to)
+            == "Python. Ссылка: 1. Зарплата: от 20. Требуемый опыт: Опыт."
     )
     vacancy_wo_salary = Vacancy("Python", "1", 0, 0, "Опыт")
     assert (
-        str(vacancy_wo_salary)
-        == "Python. Ссылка: 1. Зарплата: не указана. Требуемый опыт: Опыт."
+            str(vacancy_wo_salary)
+            == "Python. Ссылка: 1. Зарплата: не указана. Требуемый опыт: Опыт."
     )
     vacancy_wo_experience = Vacancy("Python", "1", 0, 0, "")
     assert (
-        str(vacancy_wo_experience)
-        == "Python. Ссылка: 1. Зарплата: не указана. Требуемый опыт: не указан."
+            str(vacancy_wo_experience)
+            == "Python. Ссылка: 1. Зарплата: не указана. Требуемый опыт: не указан."
     )
 
 
 def test_vacancies_math_comparison(
-    vacancy_instance: Vacancy, vacancy_instance_other: Vacancy
+        vacancy_instance: Vacancy, vacancy_instance_other: Vacancy
 ) -> None:
     """Тест проверяет корректное сравнение вакансий по средней зарплате методами <, <=, >, >=."""
     check_lt = vacancy_instance < vacancy_instance_other
@@ -65,7 +62,6 @@ def test_salary_average(vacancy_instance: Vacancy) -> None:
 
 
 def test_salary_average_with_zero(vacancy_instance: Vacancy) -> None:
-    """Тест проверяет корректный вывод средней зарплаты, когда одно из значений или все значения зарплаты равны 0."""
     vacancy_wo_salary_from = Vacancy("Python", "1", 0, 50, "Опыт")
     assert vacancy_wo_salary_from.salary_average() == 50
     vacancy_wo_salary_to = Vacancy("Python", "1", 20, 0, "Опыт")
@@ -75,7 +71,6 @@ def test_salary_average_with_zero(vacancy_instance: Vacancy) -> None:
 
 
 def test_process_vacancy() -> None:
-    """Тест проверяет корректную обработку словаря с вакансией и возвращает экземпляр класса Vacancy."""
     test_vacancy = {
         "name": "Python",
         "alternate_url": "12",
@@ -91,8 +86,6 @@ def test_process_vacancy() -> None:
 
 
 def test_process_vacancy_with_empty() -> None:
-    """Тест проверяет корректную обработку словаря с вакансией, когда не найдены/переданы данные о зарплате и/или
-    опыте работы."""
     test_vacancy = {
         "name": "Python",
         "alternate_url": "12",
@@ -106,7 +99,6 @@ def test_process_vacancy_with_empty() -> None:
 
 
 def test_cast_to_object_list() -> None:
-    """Тест проверяет корректную работу метода по конвертации json-данных в список экземпляров класса."""
     test_vacancy = [
         {
             "name": "Java",
@@ -125,7 +117,6 @@ def test_cast_to_object_list() -> None:
 
 
 def test_transform_to_dict(vacancy_instance: Vacancy) -> None:
-    """Тест проверяет корректное преобразование экземпляра класса в словарь."""
     assert vacancy_instance.transform_to_dict() == {
         "name": "Python Developer",
         "alternate_url": "1",
@@ -135,8 +126,6 @@ def test_transform_to_dict(vacancy_instance: Vacancy) -> None:
 
 
 def test_verify_data_incorrect() -> None:
-    """Тест проверяет работу валидации, когда переданы некорректные данные."""
-
     with pytest.raises(TypeError, match="Атрибут 22 должен быть строкового типа"):
         Vacancy(22, "1", 10, 50, "Опыт работы от 2 лет")
 

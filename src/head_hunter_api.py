@@ -11,7 +11,6 @@ class HeadHunterApi(BaseApi):
     per_page: int
 
     def __init__(self, per_page: int = 50) -> None:
-        """Метод для инициализации экземпляра класса HeadHunterApi."""
 
         self.__url = "https://api.hh.ru/vacancies"
         self.__headers = {"User-Agent": "HH-User-Agent"}
@@ -21,30 +20,30 @@ class HeadHunterApi(BaseApi):
 
     @property
     def url(self) -> str:
-        """Геттер возвращает url-адрес."""
+
         return self.__url
 
     @property
     def headers(self) -> dict:
-        """Геттер возвращает шапку запроса {"User_Agent": }."""
+
         return self.__headers
 
     @property
     def params(self) -> dict:
-        """Геттер возвращает параметры запроса {"text": , "page", "per_page"}."""
+
         return self.__params
 
     @property
     def vacancies(self) -> list:
-        """Геттер возвращает список вакансий."""
+
         return self.__vacancies
 
     def api_connect(self) -> Any:
-        """Метод возвращает json-данные, полученные из приватного метода __api_connect."""
+
         return self.__api_connect()
 
     def __api_connect(self) -> Any:
-        """Приватный метод для подключения по API, возвращает json-данные через get-запрос."""
+
         response = requests.get(
             self.__url, headers=self.__headers, params=self.__params
         )
@@ -55,7 +54,7 @@ class HeadHunterApi(BaseApi):
             return response.json()
 
     def get_vacancies(self, keyword: str, max_per_page: int = 1) -> Any:
-        """Метод возвращает список словарей с вакансиями по заданному ключевому слову(keyword)."""
+
         self.__params["text"] = keyword
         self.__vacancies.clear()
         while self.__params.get("page") < max_per_page:

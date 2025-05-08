@@ -12,14 +12,13 @@ class Vacancy:
     __slots__ = ("name", "url", "salary_from", "salary_to", "experience")
 
     def __init__(
-        self,
-        name: str,
-        url: str,
-        salary_from: int,
-        salary_to: int,
-        experience: str = "",
+            self,
+            name: str,
+            url: str,
+            salary_from: int,
+            salary_to: int,
+            experience: str = "",
     ) -> None:
-        """Метод для инициализации экземпляра класса Vacancy."""
 
         self.name = self.__verify_str_data(name)
         self.url = self.__verify_str_data(url)
@@ -28,7 +27,7 @@ class Vacancy:
         self.experience = experience
 
     def __str__(self) -> str:
-        """Магический метод для отображения информации об объекте класса."""
+
         if self.salary_from == 0 and self.salary_to == 0:
             salary_info = "не указана"
         elif self.salary_from == 0:
@@ -47,28 +46,27 @@ class Vacancy:
         return vacancy_info
 
     def __lt__(self, other: Any) -> Any:
-        """Магический метод сравнения «меньше» для зарплат двух вакансий."""
+
         other.__verify_salary_other(other)
         return self.salary_average() < other.salary_average()
 
     def __le__(self, other: Any) -> Any:
-        """Магический метод сравнения «меньше или равно» для зарплат двух вакансий."""
+
         other.__verify_salary_other(other)
         return self.salary_average() <= other.salary_average()
 
     def __gt__(self, other: Any) -> Any:
-        """Магический метод сравнения «больше» для зарплат двух вакансий."""
+
         other.__verify_salary_other(other)
         return self.salary_average() > other.salary_average()
 
     def __ge__(self, other: Any) -> Any:
-        """Магический метод сравнения «больше или равно» для зарплат двух вакансий."""
+
         other.__verify_salary_other(other)
         return self.salary_average() >= other.salary_average()
 
     def salary_average(self) -> float:
-        """Метод для расчета средней зарплаты вакансии. Необходим для сравнения зарплаты в диапазоне от начальной
-        суммы до конечной суммы."""
+
         if self.salary_from and self.salary_to:
             return round((self.salary_from + self.salary_to) / 2, 2)
         elif self.salary_from:
@@ -80,7 +78,7 @@ class Vacancy:
 
     @classmethod
     def process_vacancy(cls, vacancy_json_data: dict) -> Any:
-        """Классовый метод для обработки информации по вакансии из json-данных и формирования экземпляра класса."""
+
         name = vacancy_json_data.get("name", "")
         url = vacancy_json_data.get("alternate_url", "")
 
@@ -108,15 +106,14 @@ class Vacancy:
 
     @classmethod
     def cast_to_object_list(cls, vacancy_json_data: list[dict]) -> list:
-        """Классовый метод для создания списка экземпляров класса из списка словарей."""
+
         vacancies_list = []
         for vacancy in vacancy_json_data:
             vacancies_list.append(cls.process_vacancy(vacancy))
         return vacancies_list
 
     def transform_to_dict(self) -> dict:
-        """Метод для преобразования экземпляра класса Vacancy в словарь. Используется при добавлении
-        экземпляра класса в файл."""
+
         return {
             "name": self.name,
             "alternate_url": self.url,
@@ -126,15 +123,14 @@ class Vacancy:
 
     @staticmethod
     def __verify_str_data(check_str_data: str) -> str:
-        """Приватный статический метод проверяет валидность строковых данных."""
+
         if not isinstance(check_str_data, str):
             raise TypeError(f"Атрибут {check_str_data} должен быть строкового типа")
         return check_str_data
 
     @staticmethod
     def __verify_int_data(check_int_data: int) -> int:
-        """Приватный статический метод проверяет валидность целочисленных данных. Метод проверяет, что атрибут является
-        экземпляром класса int, не отрицательный."""
+
         if check_int_data is None:
             return 0
         if not isinstance(check_int_data, int):
@@ -145,7 +141,6 @@ class Vacancy:
 
     @staticmethod
     def __verify_salary_other(other_data: Any) -> None:
-        """Приватный статический метод проверяет валидность зарплаты другого объекта класса Vacancy при
-        сравнении зарплат."""
+
         if not isinstance(other_data, Vacancy):
             raise TypeError("Атрибут не относится к классу Vacancy")
