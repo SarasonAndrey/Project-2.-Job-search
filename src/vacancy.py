@@ -3,7 +3,6 @@ from typing import Any
 
 class Vacancy:
     """Класс Vacancy для работы с вакансиями."""
-
     name: str
     url: str
     salary_from: int
@@ -12,12 +11,12 @@ class Vacancy:
     __slots__ = ("name", "url", "salary_from", "salary_to", "experience")
 
     def __init__(
-        self,
-        name: str,
-        url: str,
-        salary_from: int,
-        salary_to: int,
-        experience: str = "",
+            self,
+            name: str,
+            url: str,
+            salary_from: int,
+            salary_to: int,
+            experience: str = "",
     ) -> None:
         """
         Инициализирует экземпляр класса Vacancy.
