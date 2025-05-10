@@ -11,6 +11,12 @@ class HeadHunterApi(BaseApi):
     per_page: int
 
     def __init__(self, per_page: int = 50) -> None:
+        """
+        Инициализирует экземпляр класса HeadHunterApi.
+
+        :param per_page: Количество вакансий на страницу (по умолчанию 50).
+        :type per_page: int
+        """
 
         self.__url = "https://api.hh.ru/vacancies"
         self.__headers = {"User-Agent": "HH-User-Agent"}
@@ -20,30 +26,63 @@ class HeadHunterApi(BaseApi):
 
     @property
     def url(self) -> str:
+        """
+        Возвращает URL для запросов к API HeadHunter.
 
+        :return: URL для запросов.
+        :rtype: str
+        """
         return self.__url
 
     @property
     def headers(self) -> dict:
+        """
+        Возвращает заголовки для запросов к API HeadHunter.
 
+        :return: Словарь заголовков.
+        :rtype: dict
+        """
         return self.__headers
 
     @property
     def params(self) -> dict:
+        """
+        Возвращает параметры запроса к API HeadHunter.
 
+        :return: Словарь параметров.
+        :rtype: dict
+        """
         return self.__params
 
     @property
     def vacancies(self) -> list:
+        """
+        Возвращает список полученных вакансий.
 
+        :return: Список вакансий.
+        :rtype: list
+        """
         return self.__vacancies
 
     def api_connect(self) -> Any:
+        """
+        Публичный метод для подключения к API HeadHunter.
 
+        Вызывает приватный метод __api_connect для выполнения HTTP-запроса.
+
+        :return: JSON-ответ от API.
+        :rtype: Any
+        """
         return self.__api_connect()
 
     def __api_connect(self) -> Any:
+        """
+        Приватный метод для выполнения HTTP-запроса к API HeadHunter.
 
+        :return: JSON-ответ от API.
+        :rtype: Any
+        :raises requests.exceptions.HTTPError: Если статус ответа не равен 200.
+        """
         response = requests.get(
             self.__url, headers=self.__headers, params=self.__params
         )
@@ -54,7 +93,16 @@ class HeadHunterApi(BaseApi):
             return response.json()
 
     def get_vacancies(self, keyword: str, max_per_page: int = 1) -> Any:
+        """
+        Получает список вакансий по ключевому слову.
 
+        :param keyword: Ключевое слово для поиска вакансий (например, "Python").
+        :type keyword: str
+        :param max_per_page: Максимальное количество страниц для запроса (по умолчанию 1).
+        :type max_per_page: int
+        :return: Список вакансий, соответствующих ключевому слову.
+        :rtype: list
+        """
         self.__params["text"] = keyword
         self.__vacancies.clear()
         while self.__params.get("page") < max_per_page:

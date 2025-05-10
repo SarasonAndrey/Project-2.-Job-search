@@ -7,8 +7,16 @@ class BaseApi(ABC):
 
     @abstractmethod
     def api_connect(self) -> dict[Any, Any]:
+        """
+        Устанавливает соединение с API и возвращает данные.
+
+        """
         pass
 
     @abstractmethod
     def get_vacancies(self, keyword: str) -> dict[Any, Any]:
+        """
+        Получает список вакансий по заданному ключевому слову.
+
+        """
         pass

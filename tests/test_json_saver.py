@@ -34,7 +34,7 @@ def test_get_data_from_file_empty(json_saver_init: JsonSaver) -> None:
 
 @patch("builtins.open", side_effect=FileNotFoundError)
 def test_get_data_from_file_found_error(
-        mock_built: MagicMock, json_saver_init: JsonSaver
+    mock_built: MagicMock, json_saver_init: JsonSaver
 ) -> None:
     result = json_saver_init.get_data_from_file()
     assert result == []

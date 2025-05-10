@@ -14,7 +14,7 @@ def test_category_init(head_hunter_init: HeadHunterApi) -> None:
 
 @patch("requests.get")
 def test_api_connect(
-        mocked_get: MagicMock, api_connect_data: list[dict], head_hunter_init: HeadHunterApi
+    mocked_get: MagicMock, api_connect_data: list[dict], head_hunter_init: HeadHunterApi
 ) -> None:
     mocked_get.return_value.status_code = 200
     mocked_get.return_value.json.return_value = api_connect_data
@@ -33,7 +33,7 @@ def test_api_connect(
 
 @patch("requests.get")
 def test_api_connect_status_code_error(
-        mocked_get: MagicMock, api_connect_data: list[dict], head_hunter_init: HeadHunterApi
+    mocked_get: MagicMock, api_connect_data: list[dict], head_hunter_init: HeadHunterApi
 ) -> None:
     mocked_get.return_value.status_code = 404
 
@@ -46,9 +46,9 @@ def test_api_connect_status_code_error(
 
 @patch("requests.get")
 def test_get_vacancies(
-        mocked_get: MagicMock,
-        api_connect_data_before_sort: list[dict],
-        head_hunter_init: HeadHunterApi,
+    mocked_get: MagicMock,
+    api_connect_data_before_sort: list[dict],
+    head_hunter_init: HeadHunterApi,
 ) -> None:
     hh = HeadHunterApi()
     keyword = "Python"

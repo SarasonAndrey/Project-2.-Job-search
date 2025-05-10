@@ -13,36 +13,36 @@ def test_vacancy_init(vacancy_instance: Vacancy) -> None:
 
 def test_vacancy_str(vacancy_instance: Vacancy) -> None:
     assert (
-            str(vacancy_instance)
-            == "Python Developer. Ссылка: 1. Зарплата: от 10 до 50. Требуемый опыт: Опыт работы от 2 лет."
+        str(vacancy_instance)
+        == "Python Developer. Ссылка: 1. Зарплата: от 10 до 50. Требуемый опыт: Опыт работы от 2 лет."
     )
 
 
 def test_vacancy_str_with_zero() -> None:
     vacancy_wo_salary_from = Vacancy("Python", "1", 0, 50, "Опыт")
     assert (
-            str(vacancy_wo_salary_from)
-            == "Python. Ссылка: 1. Зарплата: до 50. Требуемый опыт: Опыт."
+        str(vacancy_wo_salary_from)
+        == "Python. Ссылка: 1. Зарплата: до 50. Требуемый опыт: Опыт."
     )
     vacancy_wo_salary_to = Vacancy("Python", "1", 20, 0, "Опыт")
     assert (
-            str(vacancy_wo_salary_to)
-            == "Python. Ссылка: 1. Зарплата: от 20. Требуемый опыт: Опыт."
+        str(vacancy_wo_salary_to)
+        == "Python. Ссылка: 1. Зарплата: от 20. Требуемый опыт: Опыт."
     )
     vacancy_wo_salary = Vacancy("Python", "1", 0, 0, "Опыт")
     assert (
-            str(vacancy_wo_salary)
-            == "Python. Ссылка: 1. Зарплата: не указана. Требуемый опыт: Опыт."
+        str(vacancy_wo_salary)
+        == "Python. Ссылка: 1. Зарплата: не указана. Требуемый опыт: Опыт."
     )
     vacancy_wo_experience = Vacancy("Python", "1", 0, 0, "")
     assert (
-            str(vacancy_wo_experience)
-            == "Python. Ссылка: 1. Зарплата: не указана. Требуемый опыт: не указан."
+        str(vacancy_wo_experience)
+        == "Python. Ссылка: 1. Зарплата: не указана. Требуемый опыт: не указан."
     )
 
 
 def test_vacancies_math_comparison(
-        vacancy_instance: Vacancy, vacancy_instance_other: Vacancy
+    vacancy_instance: Vacancy, vacancy_instance_other: Vacancy
 ) -> None:
     """Тест проверяет корректное сравнение вакансий по средней зарплате методами <, <=, >, >=."""
     check_lt = vacancy_instance < vacancy_instance_other

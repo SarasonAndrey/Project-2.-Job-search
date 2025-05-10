@@ -37,9 +37,9 @@ def test_print_vacancies(capsys: Any, vacancies_list_from_file: list[Vacancy]) -
     print_vacancies(vacancies_list_from_file)
     captured = capsys.readouterr()
     assert (
-            captured.out.strip()
-            == "Python Developer. Ссылка: <https://hh.ru/vacancy/123456>. Зарплата: от 10 до 20. "
-               "Требуемый опыт: Требования: опыт работы от 3 лет."
+        captured.out.strip()
+        == "Python Developer. Ссылка: <https://hh.ru/vacancy/123456>. Зарплата: от 10 до 20. "
+        "Требуемый опыт: Требования: опыт работы от 3 лет."
     )
 
 
